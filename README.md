@@ -4,5 +4,6 @@ Python's eventsourcing library revolves around using domain events as a persiste
 
 ## Companion code
 
-This is the companion code to https://www.eventsorcery.com/posts/building-a-real-world-domain-model-python/.
+This is the companion code to https://www.eventsorcery.com/python-eventsourcing-tutorial-part-1-domain-layer/.
 
+This tutorial and code is specific to the Python eventsourcing library and builds on the pure domain model built in this post: https://github.com/zarekr/python-real-world-domain-model (a standalone tutorial), which is why it starts with version_5.py. Further code related to this tutorial will be added to this repo. 
