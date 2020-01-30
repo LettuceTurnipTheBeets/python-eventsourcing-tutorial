@@ -1,6 +1,6 @@
 """
 This is part of the code accompanying this article: 
-
+https://www.eventsorcery.com/python-eventsourcing-tutorial-part-1-domain-layer/
 
 Version 6 fully updates our pure domain model to take advantage 
 of the eventsourcing library's domain modelling tools.

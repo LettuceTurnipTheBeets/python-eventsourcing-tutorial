@@ -1,6 +1,6 @@
 """
 This is part of the code accompanying this article: 
-
+https://www.eventsorcery.com/python-eventsourcing-tutorial-part-1-domain-layer/
 
 Version 5 introduces the eventsourcing library and makes some minor
 changes to demonstrate how little time it can take to integrate
