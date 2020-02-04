@@ -62,5 +62,5 @@ if __name__ == "__main__":
     from eventsourcing.infrastructure.eventsourcedrepository import EventSourcedRepository
     repo = EventSourcedRepository(event_store)
     newco_before_investment = repo.get_entity(newco.id, at=5)
-    'Mars Investments' in [sh.name for sh in newco_before_investment.shareholders] is False
+    assert 'Mars Investments' not in [sh.name for sh in newco_before_investment.shareholders] 
     print("Event sourced repository tests passed")
