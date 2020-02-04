@@ -8,6 +8,6 @@ This is the companion code to this series of posts:
 
 1. https://www.eventsorcery.com/python-eventsourcing-tutorial-part-1-domain-layer/
 
-2. https://www.eventsorvery.com/python-eventsourcing-tutorial-part-2-storing-domain-events/
+2. https://www.eventsorcery.com/python-eventsourcing-tutorial-part-2-storing-domain-events/
 
 This tutorial and code is specific to the Python eventsourcing library and builds on the pure domain model built in this post: https://github.com/zarekr/python-real-world-domain-model (a standalone tutorial). 
