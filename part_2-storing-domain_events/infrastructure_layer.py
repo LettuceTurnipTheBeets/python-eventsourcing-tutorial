@@ -41,7 +41,7 @@ if __name__ == "__main__":
     print("All domain model tests passed")
 
     # set up the event store
-    database = construct_sqlalchemy_db("sqlite:///test.db")
+    database = construct_sqlalchemy_db()
     event_store = create_event_store(database)
 
     # add the old global events to the event store
