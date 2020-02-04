@@ -9,6 +9,11 @@ from eventsourcing.infrastructure.sqlalchemy.manager import SQLAlchemyRecordMana
 from eventsourcing.infrastructure.sequenceditem import StoredEvent
 from eventsourcing.infrastructure.sequenceditemmapper import SequencedItemMapper
 from eventsourcing.infrastructure.eventstore import EventStore
+from eventsourcing.utils.cipher.aes import AESCipher
+from eventsourcing.utils.random import encode_random_bytes, decode_bytes
+
+cipher_key = encode_random_bytes(num_bytes=32)
+cipher = AESCipher(cipher_key=decode_bytes(cipher_key))
 
 def construct_sqlalchemy_db(uri="sqlite://"):
     db = SQLAlchemyDatastore(
@@ -28,7 +33,10 @@ def create_event_store(db):
         application_name="CompanyApp",
         contiguous_record_ids=True 
     )
-    event_mapper = SequencedItemMapper(sequenced_item_class=StoredEvent)
+    event_mapper = SequencedItemMapper(
+        sequenced_item_class=StoredEvent,
+        cipher=cipher
+        )
     event_store = EventStore(
         record_manager=record_manager, 
         event_mapper=event_mapper
