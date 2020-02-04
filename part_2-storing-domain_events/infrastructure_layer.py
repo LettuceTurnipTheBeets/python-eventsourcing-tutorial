@@ -38,7 +38,7 @@ def create_event_store(db):
 if __name__ == "__main__":
     from domain_model import test_domain_model
     newco, events = test_domain_model()
-    print("All domain model tests passed")
+    print("Domain model tests passed")
 
     # set up the event store
     database = construct_sqlalchemy_db()
@@ -56,4 +56,11 @@ if __name__ == "__main__":
     # verify that our event store contains the newest event
     assert event_store.get_most_recent_event(newco.id).shareholder_name == "Mars Investments"
     assert len(event_store.list_events(newco.id)) == 7
-    print("All event store tests passed")
+    print("Event store tests passed")
+
+    # create and test a repository
+    from eventsourcing.infrastructure.eventsourcedrepository import EventSourcedRepository
+    repo = EventSourcedRepository(event_store)
+    newco_before_investment = repo.get_entity(newco.id, at=5)
+    'Mars Investments' in [sh.name for sh in newco_before_investment.shareholders] is False
+    print("Event sourced repository tests passed")
