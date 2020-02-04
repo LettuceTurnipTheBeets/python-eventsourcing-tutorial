@@ -15,7 +15,7 @@ from eventsourcing.utils.random import encode_random_bytes, decode_bytes
 cipher_key = encode_random_bytes(num_bytes=32)
 cipher = AESCipher(cipher_key=decode_bytes(cipher_key))
 
-def construct_sqlalchemy_db(uri="sqlite://"):
+def construct_sqlalchemy_db(uri="sqlite://") -> SQLAlchemyDatastore:
     db = SQLAlchemyDatastore(
         settings=SQLAlchemySettings(uri), 
         tables=(StoredEventRecord,)
@@ -25,7 +25,7 @@ def construct_sqlalchemy_db(uri="sqlite://"):
     db.setup_tables()
     return db
 
-def create_event_store(db):
+def create_event_store(db) -> EventStore:
     record_manager = SQLAlchemyRecordManager(
         session=db.session, 
         sequenced_item_class=StoredEvent, 
