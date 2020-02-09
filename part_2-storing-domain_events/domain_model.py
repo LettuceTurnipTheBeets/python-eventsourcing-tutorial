@@ -137,7 +137,7 @@ def add_to_event_record(event: Company.Event) -> None:
     events.extend(event)
 
 def is_company_event(event: Any) -> bool: 
-    return all(isinstance(e, Company.Event) for e in events)
+    return all(isinstance(e, Company.Event) for e in event)
 
 def test_domain_model():
     # Get subscriber ready
