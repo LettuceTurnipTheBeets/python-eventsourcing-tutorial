@@ -103,12 +103,8 @@ if __name__ == "__main__":
     alex_id = app.involve_person(title="Mr", name="Alex Kamal", address="Mars", date_of_birth = "08/1985")        
     company_id = app.prepare_new_company(name="Rocinante Limited", address="Space", sic_code=27151, initial_directors_ids=[jim_id, naomi_id])
 
-    nom_val = Decimal("0.0001")
-
-    app.issue_ordinary_shares(in_company_id=company_id, to_person_id=jim_id, number_of_shares=2500, nominal_value_per_share=nom_val, price_paid_per_share=nom_val)
-    app.issue_ordinary_shares(in_company_id=company_id, to_person_id=naomi_id, number_of_shares=2500, nominal_value_per_share=nom_val, price_paid_per_share=nom_val)
-    app.issue_ordinary_shares(in_company_id=company_id, to_person_id=amos_id, number_of_shares=2500, nominal_value_per_share=nom_val, price_paid_per_share=nom_val)
-    app.issue_ordinary_shares(in_company_id=company_id, to_person_id=alex_id, number_of_shares=2500, nominal_value_per_share=nom_val, price_paid_per_share=nom_val)
+    for person_id in [jim_id, amos_id, naomi_id, alex_id]:
+        app.issue_ordinary_shares(in_company_id=company_id, to_person_id=person_id, number_of_shares=2500, nominal_value_per_share=Decimal("0.0001"), price_paid_per_share=Decimal("0.0001"))
 
     company = app.repository[company_id]
 

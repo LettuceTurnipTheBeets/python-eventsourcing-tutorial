@@ -90,36 +90,14 @@ class TestCompanyApp(unittest.TestCase):
         self.assertIn(self.naomi_id, [director.person_id for director in directors])
 
     def test_ordinary_shares_can_be_issued(self):
-        nom_val = Decimal("0.0001")
-
-        self.app.issue_ordinary_shares(
-            in_company_id=self.company_id,
-            to_person_id=self.jim_id, 
-            number_of_shares=2500, 
-            nominal_value_per_share=nom_val, 
-            price_paid_per_share=nom_val
-        )
-        self.app.issue_ordinary_shares(
-            in_company_id=self.company_id,
-            to_person_id=self.amos_id, 
-            number_of_shares=2500, 
-            nominal_value_per_share=nom_val, 
-            price_paid_per_share=nom_val
-        )
-        self.app.issue_ordinary_shares(
-            in_company_id=self.company_id,
-            to_person_id=self.naomi_id, 
-            number_of_shares=2500, 
-            nominal_value_per_share=nom_val, 
-            price_paid_per_share=nom_val
-        )
-        self.app.issue_ordinary_shares(
-            in_company_id=self.company_id,
-            to_person_id=self.alex_id, 
-            number_of_shares=2500, 
-            nominal_value_per_share=nom_val, 
-            price_paid_per_share=nom_val
-        )
+        for person_id in [self.jim_id, self.naomi_id, self.amos_id, self.alex_id]:
+            self.app.issue_ordinary_shares(
+                in_company_id=self.company_id,
+                to_person_id=person_id, 
+                number_of_shares=2500, 
+                nominal_value_per_share=Decimal("0.0001"), 
+                price_paid_per_share=Decimal("0.0001")
+            )            
         company = self.app.repository[self.company_id]
         
         self.assertEqual(len(company.get_shareholdings(share_class_name="ordinary")), 4)
