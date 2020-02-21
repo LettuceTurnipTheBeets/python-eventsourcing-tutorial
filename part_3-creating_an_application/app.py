@@ -26,7 +26,7 @@ class CompanyApp(SQLAlchemyApplication):
         date_of_birth: str,
         former_names: list = None
     ) -> UUID:
-        person = Person.__create__(
+        person = Person.involve(
             title=title, 
             name=name, 
             address=address, 
@@ -44,7 +44,7 @@ class CompanyApp(SQLAlchemyApplication):
         initial_directors_ids: list,
     ) -> UUID:
         assert isinstance(initial_directors_ids, list), "initial_directors_ids must be provided as a list"
-        company = Company.__create__(
+        company = Company.prepare_new(
           name=name, 
           registered_office=address,
           sic_code=sic_code,
@@ -93,8 +93,9 @@ class CompanyApp(SQLAlchemyApplication):
 
 if __name__ == "__main__":
     # For using the Python shell
-
-    app = CompanyApp(persist_event_type=(Company.Event, Person.Event))
+    from eventsourcing.utils.random import encoded_random_bytes
+    cipher_key = encoded_random_bytes(32)
+    app = CompanyApp(persist_event_type=(Company.Event, Person.Event), uri="sqlite:///:memory:", cipher_key=cipher_key)
 
     jim_id = app.involve_person(title="Mr", name="James Holden", address="Earth", date_of_birth = "08/1987")        
     amos_id = app.involve_person(title="Mr", name="Amos Burton", address="Earth", date_of_birth = "02/1991")        
